@@ -17,8 +17,12 @@ bot = telebot.TeleBot(API_TOKEN)
 # Handle '/start' and '/help'
 @bot.message_handler(commands=['help', 'start'])
 def send_welcome(message):
-    bot.reply_to(message, """\
-Bem vindo ao Price/Dividend Bot\ """)
+    bot.send_message(message, """\
+Bem vindo ao Price/Dividend Bot \
+Comandos: \
+/consultar nome do ativo nos EUA (tsla)\
+/consultar nome do ativo brasilerio .SA (azul4.sa)\
+/consultar nome da crypto USD (ethusd)""")
 
 @bot.message_handler(commands=['consultar'])
 def consultar(message):
