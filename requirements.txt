@@ -1,5 +1,6 @@
 pyTelegramBotAPI==4.6.0
 mysql-connector-python==8.0.28
+PyMySQL==0.8.1
 gspread==5.4.0
 pyOpenSSL==22.0.0
 oauth2client==4.1.3
