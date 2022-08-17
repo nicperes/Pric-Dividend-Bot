@@ -71,11 +71,11 @@ def insert_monitoracao(conn, monitoracao):
         conn.rollback()
         return False
 
-def excluir_monitoracao(conn, id):
+def excluir_monitoracao(conn, id, chatId):
     try:
         cur = conn.cursor()
         #cur.row_factory = sqlite3.Row
-        cur.execute("DELETE FROM MONITORACAO WHERE ID = %s", (id,))
+        cur.execute("DELETE FROM MONITORACAO WHERE ID = %s AND Chat_id = %s", (id,chatId, ))
         conn.commit()
         return True
     except Exception as e:
@@ -118,6 +118,29 @@ def consult_table_monitor(conn, message, json_str = True):
     except Exception as e:
         return e
 
+def consult_all():
+    try:
+
+        cur = conn.cursor()
+        #cur.row_factory = sqlite3.Row
+        cur.execute("SELECT ID, Chat_id, Name, Operator, Variation_number from MONITORACAO")
+        result = cur.fetchall()
+        print(len(result))
+        tamanhoLista = len(result)
+
+        lista = list(result)
+
+        row_headers = [x[0] for x in cur.description]
+        json_data = []
+        for rv in result:
+            json_data.append(dict(zip(row_headers, rv)))
+        return (json.dumps(json_data))
+
+        #if json_str:
+            #return (message, json.dumps([dict(ix) for ix in result]))
+
+    except Exception as e:
+        return e
 
 #if __name__ == '__main__':
 #    database = (r"./monitoramento.db")
