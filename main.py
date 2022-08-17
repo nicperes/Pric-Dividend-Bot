@@ -56,7 +56,7 @@ def dividendos(message):
 #'/alertar'
 @bot.message_handler(commands=['criar_alerta'])
 def inserir_monitoracao(message):
-    alerta = message.text.replace("/alertar ", "")
+    alerta = message.text.replace("/criar_alerta ", "")
     array = alerta.split(" ")
 
     if len(array) == 3:
